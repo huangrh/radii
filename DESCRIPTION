@@ -1,0 +1,14 @@
+Package: radii
+Type: Package
+Title: Determine Hydrodynamic Radius from Gel Filtration
+Version: 0.1.0
+Author: Huang, Ren-Huai
+Maintainer: Huang, Ren-Huai <huangrenhuai@gmail.com>
+Description: More about what it does (maybe more than one line)
+License: GPL
+LazyData: TRUE
+RoxygenNote: 5.0.1
+Imports: shiny (>= 0.13.2)
+Suggests: knitr,
+    rmarkdown
+VignetteBuilder: knitr

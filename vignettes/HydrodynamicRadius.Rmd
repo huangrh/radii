@@ -1,0 +1,69 @@
+---
+title: "Determine Hydrodyamic Radii by Gel Filtration Chromatography."
+author: "Vignette Author"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Determination of hydrodyamic radii by gel filtration chromatography.}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+ 
+### Gel filtration columns columns:   
+
+- Superdex 200 (16/60; GE Healthcare)  
+- Superose 6 (10/300; GE Healthcare)  
+
+### Standard proteins of known Rh:  
+
+- bovine thyroglobulin (8.5 nm, 670 kDa)  
+- bovine IgG (5.22 nm, 158 kDa)  
+- chicken ovalbumin (2.75 nm, 44 kDa)    
+- horse myoglobin (1.89 nm, 17 kDa)   
+
+### Partition coefficient (s):  
+
+The partition coefficient (s) was calculated for each standard protein from the observed elution volume (Vs), total column volume (Vt), and void volume (Vo):
+
+$$ s = \frac{(Vs - Vo)}{(Vt - Vo)} $$
+
+### Linear regression analysis of stokes radius:  
+
+Linear regression analysis of the values for Rh as a function of the inverse error function complement $(erfc^{-1})$ of sigma (s) gave excellent correlation coefficients (R2 > 0.98), and the fitted parameters did not vary significantly for several chromatography buffer conditions:
+
+- 20 mM Hepes (pH 7.4), 150 mM NaCl, 5 mM EDTA (orange circles); 
+- 20 mM Hepes (pH 7.4), 10 mM CaCl2 (blue circles); 
+- 20 mM Mes (pH 6.2), 10 mM CaCl2 (green circles). 
+
+Partition coefficients for other proteins were used to calculate Rh according to the indicated equations.
+
+
+```{r example1, echo = FALSE, message=FALSE, results="asis"}
+## see RH110806A for more detail
+library("knitr"); library(radii)
+# kable(radii::protein_std, format = "markdown")
+
+## Superdex 200 10-300GL 
+vt = 21.54
+vo = 8.21
+protein_std$sigma <- radii::partition_coef(protein_std$ve, vt = vt, vo=vo)
+protein_std$erfcinv <- radii::erfcinv(protein_std$sigma)
+# 
+kable(protein_std, format = "markdown")
+protein_std <- na.omit(protein_std)
+with(protein_std, plot(erfcinv, radii))
+fit <- lm (radii~erfcinv-1, data = protein_std)
+summary(fit)
+xdat <- seq(min(protein_std$erfcinv), max(protein_std$erfcinv),by = 0.01 )
+pred <- predict(fit, newdata = data.frame(erfcinv=xdat))
+lines(xdat,pred)
+
+```
+
+### References: 
+
+Hydrodynamic radius, Rh, can refer to the Stokes radius of a polymer or other macromolecule.  
+1. [Hydrodynamic radius](https://en.wikipedia.org/wiki/Hydrodynamic_radius)  
+2. [Stokes radius](https://en.wikipedia.org/wiki/Stokes_radius)   
+3. Ackers GK (1967) J Biol Chem 242: 3237-3238  
+
