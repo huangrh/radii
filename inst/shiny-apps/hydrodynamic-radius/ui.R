@@ -24,7 +24,10 @@ sidebarLayout(
     # Tabset that include data, results and plots
     mainPanel(
         tabsetPanel(type="tabs",
-            tabPanel("Standardize"
+            tabPanel("Standardize",
+                     knitr::kable(radii::protein_std)
+                     #visFun(),
+                     # abc()
 
             ),
             tabPanel("Analysis",

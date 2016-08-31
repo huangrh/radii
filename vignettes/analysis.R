@@ -1,16 +1,38 @@
 ## ------------------------------------------------------------------------
+require(ggplot2)
+require(radii)
+
+## ---- fig.height=4, fig.width=6------------------------------------------
+# load the data: the gel filtration elusion profile
+file <- system.file("extdata", "160826bioradstdpH74EDTA_HiLoad.asc", package="radii")
+HiLoad_std <- read.csv(file, header = TRUE, skip=2, sep = "\t"); 
+HiLoad_std <- na.omit(HiLoad_std[, 1:2])
+
+# plot the data: gel filtration profile
+# with(HiLoad_std, plot(mAU ~ ml, type = "l", main = "HiLoad: Biorad STD"))
+#
+g <- radii:::ggplot() 
+g <- g + ggplot2::geom_line(aes(ml, mAU), data=HiLoad_std)
+g <- g + ggtitle("HiLoad: Biorad std") + xlab("Vol (mL)") + ylab("A280 (mAU)")
+label=as.character(radii::protein_std_HiLoad$ve)
+pos <- data.frame(x= as.numeric(label),y = c(42, 29, 21, 34, 20))
+g <- g + annotate("text", label=label, x=pos$x, y=pos$y)
+print(g)
+
+## ---- fig.height = 4, fig.width=6----------------------------------------
 # superdex 200 HiLoad 16/60
 vt = mean(c(122.31,122.93))
 vo = mean(c(47.26,46.59))
-protein_std$sigma <- radii::partition_coef(protein_std$ve)
-protein_std$erfcinv <- radii::erfcinv(protein_std$sigma)
+
+protein_std_HiLoad$sigma <- radii::partition_coef(protein_std_HiLoad$ve, vo=vo, vt=vt)
+protein_std_HiLoad$erfcinv <- radii::erfcinv(protein_std_HiLoad$sigma)
 # 
-kable(protein_std, format = "markdown")
-protein_std <- na.omit(protein_std)
-with(protein_std, plot(erfcinv, radii))
-fit <- lm (radii~erfcinv-1, data = protein_std)
+knitr::kable(protein_std_HiLoad, format = "markdown")
+protein_std_HiLoad <- na.omit(protein_std_HiLoad)
+with(protein_std_HiLoad, plot(erfcinv, radii))
+fit <- lm (radii~erfcinv-1, data = protein_std_HiLoad)
 summary(fit)
-xdat <- seq(min(protein_std$erfcinv), max(protein_std$erfcinv),by = 0.01 )
+xdat <- seq(min(protein_std_HiLoad$erfcinv), max(protein_std_HiLoad$erfcinv),by = 0.01 )
 pred <- predict(fit, newdata = data.frame(erfcinv=xdat))
 lines(xdat,pred)
 

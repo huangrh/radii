@@ -17,6 +17,7 @@ vignette: >
 ### Standard proteins of known Rh:  
 
 - bovine thyroglobulin (8.5 nm, 670 kDa)  
+
 - bovine IgG (5.22 nm, 158 kDa)  
 - chicken ovalbumin (2.75 nm, 44 kDa)    
 - horse myoglobin (1.89 nm, 17 kDa)   
