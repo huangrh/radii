@@ -3,6 +3,7 @@
 
 ### Introduction
 
+The size of the protein is very much reflect its function state. Therefore there are a panel of methods developed to mesure it. One of the approch is to use elusion profile from gel filtration column, which is equaped in most lab and has high accuracy. However the data analysis is complicated for most biologiest and so it is limited. The package radii makes this method feasible. 
 
 -----
 ### Installation
