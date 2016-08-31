@@ -1,6 +1,6 @@
 ---
 title: "Stokes Radius Analysis by Gel Filtration "
-author: "Vignette Author"
+author: "By Ren-Huai Huang"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
@@ -49,7 +49,7 @@ pred <- predict(fit, newdata = data.frame(erfcinv=xdat))
 lines(xdat,pred)
 ```
 
-```{test}
+```{}
 p <- ggplot() + geom_point(mtcars, aes(wt, mpg))
 p + annotate("text", x=2:3, y=20, label=c("label1", "label2"))
 ```
