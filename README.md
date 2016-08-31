@@ -1,8 +1,8 @@
-## "radii"
+# radii: Determine Stokes radius by gel giltration using R
+
 
 ### Introduction
 
-Determine Stokes radius by gel giltration using R
 
 -----
 ### Installation
