@@ -1,4 +1,6 @@
-# introduction to radii
+## "radii"
+
+### Introduction
 
 Determine Stokes Radius By Gel Filtration using R
 
