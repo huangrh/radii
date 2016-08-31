@@ -2,7 +2,7 @@
 
 ### Introduction
 
-Determine Stokes Radius By Gel Filtration using R
+Determine Stokes radius by gel giltration using R
 
 -----
 ### Installation
