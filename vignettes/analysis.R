@@ -29,10 +29,37 @@ protein_std_HiLoad$erfcinv <- radii::erfcinv(protein_std_HiLoad$sigma)
 # 
 knitr::kable(protein_std_HiLoad, format = "markdown")
 protein_std_HiLoad <- na.omit(protein_std_HiLoad)
-with(protein_std_HiLoad, plot(erfcinv, radii))
-fit <- lm (radii~erfcinv-1, data = protein_std_HiLoad)
+
+fit <- lm (radii~erfcinv+1, data = protein_std_HiLoad)
 summary(fit)
 xdat <- seq(min(protein_std_HiLoad$erfcinv), max(protein_std_HiLoad$erfcinv),by = 0.01 )
 pred <- predict(fit, newdata = data.frame(erfcinv=xdat))
-lines(xdat,pred)
+
+# Plotting 
+g = radii:::ggplot() + geom_point(data = protein_std_HiLoad, aes(erfcinv, radii)) 
+g <- g + ggtitle(expression("Stokes raddi vs erfcinv (" ~ sigma ~ ")"))
+g + geom_line(aes(xdat,pred))
+
+## ------------------------------------------------------------------------
+# superdex 200 HiLoad 16/60
+vt = mean(c(122.31,122.93))
+vo = mean(c(47.26,46.59))
+# sample data
+ve_D1D2_pure   = 74.36
+sigma_D1D2_pure=radii::partition_coef(ve_D1D2_pure, vo=vo, vt=vt)
+erfcinv_D1D2_pure= radii::erfcinv(sigma_D1D2_pure)
+r_D1D2_pure = predict(fit, newdata = data.frame(erfcinv=erfcinv_D1D2_pure))
+print(paste("Stokes radius of the purified D1D2", r_D1D2_pure, "nm"))
+
+## ------------------------------------------------------------------------
+# D1D2
+ve_D1D2_plasma = 81
+sigma_D1D2_plasma=radii::partition_coef(ve_D1D2_plasma, vo=vo, vt=vt)
+erfcinv_D1D2_plasma= radii::erfcinv(sigma_D1D2_plasma)
+r_D1D2_plasma = predict(fit, newdata = data.frame(erfcinv=erfcinv_D1D2_plasma))
+print(paste("Stokes radius of the purified D1D2", r_D1D2_plasma, "nm"))
+
+
+## ------------------------------------------------------------------------
+summary(fit)
 

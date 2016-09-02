@@ -11,3 +11,7 @@ ggplot <- function() {
     g <- g + theme(axis.line.y=element_line(size=0.5,colour="black",linetype="solid"))
     # g <- g + theme(panel.background=element_rect(fill="grey"))
 }
+
+# anotate example
+#> p <- ggplot() + geom_point(mtcars, aes(wt, mpg))
+#> p + annotate("text", x=2:3, y=20, label=c("label1", "label2"))
