@@ -1,8 +1,8 @@
-## ------------------------------------------------------------------------
+## ---- echo = FALSE-------------------------------------------------------
 require(ggplot2)
 require(radii)
 
-## ---- fig.height=4, fig.width=6------------------------------------------
+## ---- fig.height=4, fig.width=6, echo = FALSE, message = FALSE-----------
 # load the data: the gel filtration elusion profile
 file <- system.file("extdata", "160826bioradstdpH74EDTA_HiLoad.asc", package="radii")
 HiLoad_std <- read.csv(file, header = TRUE, skip=2, sep = "\t"); 
