@@ -8,12 +8,12 @@ vignette: >
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
-```{r, echo = FALSE}
+```{r, echo = FALSE, message = FALSE, error = FALSE}
 require(ggplot2)
 require(radii)
 ```
 ### Load and plot the gel filtration data
-```{r, fig.height=4, fig.width=6, echo = FALSE, message = FALSE}
+```{r, fig.height=4, fig.width=6, echo = FALSE, message = FALSE, error = FALSE}
 # load the data: the gel filtration elusion profile
 file <- system.file("extdata", "160826bioradstdpH74EDTA_HiLoad.asc", package="radii")
 HiLoad_std <- read.csv(file, header = TRUE, skip=2, sep = "\t"); 
