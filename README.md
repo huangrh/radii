@@ -17,4 +17,4 @@ To install radii from github:
 -----
 ### Examples    
 
-[Using gel filtration HiLoad Superdex 200 to determine protein stokes radius](https://github.com/huangrh/radii/blob/master/vignettes/Example_StokesRadiusAnalysis.pdf)
+[Using gel filtration HiLoad Superdex 200 to determine protein stokes radius](https://github.com/huangrh/radii/blob/master/vignettes/analysis.pdf)
